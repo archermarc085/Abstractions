@@ -4,15 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Media;
+using System.Text.RegularExpressions;
+using System.Linq.Expressions;
 namespace Task2
 {
     class Player:IPlayable,IRecodable
     {
+         string GetName<T>(Expression<Func<T>> property)
+        {
+            return (property.Body as MemberExpression).Member.Name;
+        }
         SoundPlayer player = new SoundPlayer();
         public void Play()
         {
             Console.WriteLine("Played song from IPlayable");
-            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\blizzard.wav";
+            var s = GetName(() => Resource1.blizzard);
+            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\"+s+".wav";
             player.Play();
         }
        
