@@ -11,11 +11,6 @@ namespace Task1
     class TXTHandller:AbstractHandler
     {
         override protected string FileName { get { return "information.txt"; } }
-        public override void Open()
-        {
-            Console.WriteLine("File: {0} opened", FileName);
-            Process.Start("notepad.exe", FileName);
-        }
         public override void Create()
         {
             if (File.Exists(FileName))

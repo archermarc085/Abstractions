@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,11 @@ namespace Task1
     { 
         virtual protected string FileName { get; set; }
         protected FileInfo file = null;
-        abstract public void Open();
+        public void Open() 
+        {
+            Console.WriteLine("File: {0} opened", FileName);
+            Process.Start(FileName);
+        }
         virtual public void Create()
         {
             file = new FileInfo(FileName);

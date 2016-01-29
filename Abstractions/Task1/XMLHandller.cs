@@ -12,12 +12,6 @@ namespace Task1
     class XMLHandller:AbstractHandler
     {
         override protected string FileName { get { return "output.xml"; } }
-
-        public override void Open()
-        {
-            Console.WriteLine("File: {0} opened", FileName);
-            Process.Start("explorer.exe", FileName);
-        }
         public override void Create()
         {
             if (File.Exists(FileName))

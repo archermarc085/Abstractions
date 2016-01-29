@@ -12,12 +12,6 @@ namespace Task1
     class DOCHandller:AbstractHandler
     {
         override protected string FileName { get { return "file.docx"; } }
-
-        public override void Open()
-        {
-            Console.WriteLine("File: {0} opened", FileName);
-            Process.Start("WINWORD.EXE", FileName);
-        }
         public override void Create()
         {
             if (File.Exists(FileName))
@@ -37,12 +31,12 @@ namespace Task1
             base.Change();
             var doc = DocX.Load(FileName);
             string headlineText = "5 фундаментальных правил успеха разработчика ";
-            string paraOne = ""
-                + "1. Не изобретайте колесо" + Environment.NewLine
-                + "2. Не тратьте время на код, сосредоточьтесь на скорейшем завершении проекта" + Environment.NewLine
-                + "3. Обеспечьте техническую поддержку кода " + Environment.NewLine
-                + "4. Пользуйтесь правом возврата денег при отсутствии ТП" + Environment.NewLine
-                + "5. Проверяйте коды и модули на наличие угроз и уязвимостей";
+            StringBuilder paraOne = new StringBuilder();
+            paraOne.AppendLine("1. Не изобретайте колесо");
+            paraOne.AppendLine("2. Не тратьте время на код, сосредоточьтесь на скорейшем завершении проекта");
+            paraOne.AppendLine("3. Обеспечьте техническую поддержку кода ");
+            paraOne.AppendLine("4. Пользуйтесь правом возврата денег при отсутствии ТП");
+            paraOne.AppendLine("5. Проверяйте коды и модули на наличие угроз и уязвимостей");
 
             var headLineFormat = new Novacode.Formatting();
             headLineFormat.FontFamily = new System.Drawing.FontFamily("Times New Roman");
@@ -55,7 +49,7 @@ namespace Task1
 
             doc.InsertParagraph("paragraph 1");
             doc.InsertParagraph(headlineText, false, headLineFormat);
-            doc.InsertParagraph(paraOne, false, paraFormat);
+            doc.InsertParagraph(paraOne.ToString(), false, paraFormat);
             doc.Save();
             Save();
         }
